@@ -2,6 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import cors from "cors";
 import mongoose from "mongoose";
+// import { DB_HOST } from "./config.js";
 
 import contactsRouter from "./routes/contactsRouter.js";
 
@@ -22,11 +23,9 @@ app.use((err, req, res, next) => {
 	res.status(status).json({ message });
 });
 
-const DB_HOST =
-	"mongodb+srv://samsonenkomaxwork:chhw4RTsMhCB0Gd4@home-task.ldmf3n0.mongodb.net/phonebook?retryWrites=true&w=majority&appName=home-task";
 //connect to database and run server if error show message and stop all processes
 mongoose
-	.connect(DB_HOST)
+	.connect(process.env.DB_HOST)
 	.then(() => {
 		console.log("Database Phonebook connected successfuly");
 		app.listen(3000, () => {
@@ -37,8 +36,3 @@ mongoose
 		console.log(error.message);
 		process.exit(1);
 	});
-
-//chhw4RTsMhCB0Gd4
-//samsonenkomaxwork
-//mongodb+srv://samsonenkomaxwork:chhw4RTsMhCB0Gd4@home-task.ldmf3n0.mongodb.net/
-//mongodb+srv://samsonenkomaxwork:chhw4RTsMhCB0Gd4@home-task.ldmf3n0.mongodb.net/phonebook?retryWrites=true&w=majority&appName=home-task
