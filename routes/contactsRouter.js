@@ -5,6 +5,7 @@ import contactsControllers from "../controllers/contactsControllers.js";
 import {
 	createContactSchema,
 	updateContactSchema,
+	updateStatusSchema,
 } from "../schemas/contactsSchemas.js";
 import validateBody from "../decorators/validateBody.js";
 
@@ -31,9 +32,10 @@ contactsRouter.put(
 	contactsControllers.updateContact
 );
 
-contactsRouter.put(
+contactsRouter.patch(
 	"/:id/favorite",
 	isValidId,
+	validateBody(updateStatusSchema),
 	contactsControllers.updateStatusContact
 );
 
